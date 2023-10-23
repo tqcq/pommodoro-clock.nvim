@@ -3,7 +3,7 @@ local Popup = require("nui.popup")
 local Animation = require("pommodoro-clock.animation")
 local Utils = require("pommodoro-clock.utils")
 
-local WIDTH = 38
+local WIDTH = 24
 local HEIGHT = 4
 
 local M = {}
@@ -59,9 +59,9 @@ M.current_state = {
 --- Starts the timer.
 --
 -- @param mode The mode to start the timer in.
-M.start = function(mode)
+M.start = function(mode, min)
   M.current_state.mode = M.config.modes[mode]
-  M.start_timer()
+  M.start_timer(min)
 end
 
 --- Toggles the pause state of the current timer.
@@ -116,7 +116,7 @@ end
 -- If the timer is already running, it will be stopped.
 --
 -- @return nil
-M.start_timer = function()
+M.start_timer = function(min)
   M.current_state.paused = false
 
   if M.current_state.timer ~= nil then
@@ -124,7 +124,12 @@ M.start_timer = function()
   end
 
   M.show_popup()
-  M.current_state.time = M.current_state.mode[2] * 60
+  if min ~= nil then
+    M.current_state.time = min * 60
+    M.current_state.mode[2] = min
+  else
+    M.current_state.time = M.current_state.mode[2] * 60
+  end
 
   M.render()
   M.say_event("start")
