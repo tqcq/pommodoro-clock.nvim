@@ -1,74 +1,50 @@
 local M = {}
 
 local zero = [[
-█▀▀█
-█  █
-█▄▄█
+0
 ]]
 
 local one = [[
- ▄█░
-░░█░
-░▄█▄
+1
 ]]
 
 local two = [[
-░█▀█
- ░▄▀
-░█▄▄
+2
 ]]
 
 local tree = [[
-█▀▀█
-░░▀▄
-█▄▄█
+3
 ]]
 
 local four = [[
-░█▀█
-█▄▄█
-░░░█
+4
 ]]
 
 local five = [[
- █▀▀
- ▀▀▄
-░▄▄▀
+5
 ]]
 
 local six = [[
-▄▀▀▄
-█▄▄░
-▀▄▄▀
+6
 ]]
 
 local seven = [[
-▀▀▀█
-░░█░
-░▐▌░
+7
 ]]
 
 local eight = [[
-▄▀▀▄
-▄▀▀▄
-▀▄▄▀
+8
 ]]
 
 local nine = [[
-▄▀▀▄
-▀▄▄█
-░▄▄▀
+9
 ]]
 
 local separator = [[
-▄
-░
-▀
+:
 ]]
 
 local clock = [[
-██
-  
   
 ]]
 

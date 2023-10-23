@@ -237,13 +237,13 @@ M.show_popup = function()
 end
 
 M.say_event = function(type)
-  M.say(M.current_state.mode[1] .. " session " .. type)
+  --M.say(M.current_state.mode[1] .. " session " .. type)
 end
 
 M.say = function(text)
-  if M.config.sound == "voice" then
-    os.execute(M.config.say_command .. ' "' .. text .. '"')
-  end
+  --if M.config.sound == "voice" then
+  --  os.execute(M.config.say_command .. ' "' .. text .. '"')
+  --end
 end
 
 return M
