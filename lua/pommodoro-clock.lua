@@ -42,6 +42,7 @@ M.setup = function(config)
   vim.api.nvim_set_hl(0, "PommodoroClockG2", { fg = "#9ef01a" })
   vim.api.nvim_set_hl(0, "PommodoroClockG3", { fg = "#70e000" })
   vim.api.nvim_set_hl(0, "PommodoroClockMin", { fg = "#666666" })
+  vim.api.nvim_set_hl(0, "PommodoroClockCount", { fg = "#ff2309" })
   vim.api.nvim_set_hl(0, "PommodoroClockText", { fg = "#ff3399" })
 end
 
@@ -54,6 +55,7 @@ M.current_state = {
   mode = nil,
   time = nil,
   popup = nil,
+  count = 0,
 }
 
 --- Starts the timer.
@@ -62,6 +64,12 @@ M.current_state = {
 M.start = function(mode, min)
   M.current_state.mode = M.config.modes[mode]
   M.start_timer(min)
+end
+
+M.setCount = function(num)
+  if type(num) == "number" and num >= 0 then
+    M.current_state.count = num
+  end
 end
 
 --- Toggles the pause state of the current timer.
@@ -148,6 +156,9 @@ M.tick = function()
   if M.current_state.time == 0 then
     M.current_state.timer:stop()
     M.say_event("end")
+    if M.current_state.count ~= 0 then
+      M.current_state.count = M.current_state.count - 1
+    end
   end
 
   M.render()
@@ -186,7 +197,8 @@ M.render = function()
     virt_text = {
       { "░░ ", "PommodoroClockG1" },
       { M.current_state.mode[1] .. " ", "PommodoroClockText" },
-      { M.current_state.mode[2] .. "MIN", "PommodoroClockMin" },
+      { M.current_state.mode[2] .. "MIN  ", "PommodoroClockMin" },
+      { M.current_state.count .. "COUNT", "PommodoroClockCount" },
       { paused_text, "PommodoroClockText" },
     },
     virt_text_pos = "overlay",
@@ -237,7 +249,7 @@ M.show_popup = function()
       callback = function()
         if M.current_state and M.current_state.popup then
           M.current_state.popup:update_layout()
-      end
+        end
       end,
     })
   end
