@@ -235,7 +235,9 @@ M.show_popup = function()
     pcall(vim.api.nvim_create_autocmd, { "WinResized" }, {
       group = vim.api.nvim_create_augroup("refresh_popup_layout", { clear = true }),
       callback = function()
-        M.current_state.popup:update_layout()
+        if M.current_state and M.current_state.popup then
+          M.current_state.popup:update_layout()
+      end
       end,
     })
   end
