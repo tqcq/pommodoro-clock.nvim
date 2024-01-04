@@ -237,7 +237,7 @@ M.show_popup = function()
     local animation = Animation:initialize(M.config.animation_duration, M.config.animation_fps, function(fraction)
       M.current_state.popup:update_layout({
         size = {
-          width = math.floor(WIDTH * fraction),
+          width = math.floor(WIDTH * math.max(fraction, 0.5)),
           height = HEIGHT,
         },
       })
