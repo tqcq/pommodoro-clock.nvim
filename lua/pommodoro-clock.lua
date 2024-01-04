@@ -218,7 +218,7 @@ M.show_popup = function()
         height = HEIGHT,
       },
       focusable = false,
-      relative = "win",
+      relative = "editor",
       border = {
         style = "none",
       },
